@@ -48,7 +48,8 @@ contract XcelShoes is ERC20, Ownable {
         if (price > balanceOf(msg.sender)) {
             revert NotEnoughXcel("Xcel Token not enough", price);
         }
-        _transfer(msg.sender, address(this), price);
+
+        _burn(msg.sender, price); // Burn the tokens instead of transferring them
 
         string[] storage currentRedeemedItems = _redeemedItems[msg.sender];
         currentRedeemedItems.push(_itemToString(item));
